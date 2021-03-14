@@ -1,0 +1,29 @@
+.header {
+  background-color: cornflowerblue;
+  display: flex;
+  padding: 1em;
+  & .link {
+    color: whitesmoke;
+  }
+  &__logo{
+    flex: 1;
+  }
+  &__menu {
+    align-self: center;
+    flex: 2;
+    justify-content: center;
+  }
+  
+  &__user{
+    align-self: center;
+    flex: 1;
+    &__menu {
+      display: flex !important;
+      flex-direction: column;
+      padding: .5em;
+      .link {
+        color: #807e7e;
+      }
+    }
+  }
+}
