@@ -1,26 +1,9 @@
-import { useEffect, useState } from "react";
+
+import { Button } from "react-bootstrap";
 import "./MyProfile.scss";
 
-const InitialValue = {
-  name: 'Username',
-  biography: 'This is my biography',
-  badges: [],
-  groups: [],
-  events: []
-};
-
-const MyProfile = () => {
-  const [user, setUser] = useState(InitialValue);
-  
-  useEffect(() => {
-    sessionStorage.setItem('user', JSON.stringify(InitialValue));
-  }, [user]);
-
-  useEffect(() => {
-    const data =  JSON.parse(sessionStorage.getItem('user'));
-    setUser(data);
-  }, []);
-
+const MyProfile = ({user}) => {
+  console.log(user)
   return (
     <section className="my-profile">
       <div className="my-profile__image">
@@ -30,29 +13,29 @@ const MyProfile = () => {
         <h3>Username: {user.name}</h3>
         <p>{user.biography}</p>
         <hr />
-        <h3>Badges</h3>
+        <h3><Button variant="light">Badges</Button></h3>
         <ul>
           {
-            user.badges.length > 0 && user.badges.map(values => (
-              <li>{values}</li>
+            user.badges.length > 0 && user.badges.map((values, index) => (
+              <li key={index}>{values}</li>
             ))
           }
         </ul>
         <hr />
-        <h3>Events</h3>
+        <h3><Button variant="light">Events</Button></h3>
         <ul>
           {
-            user.events.length > 0 && user.events.map(values => (
-              <li>{values}</li>
+            user.events.length > 0 && user.events.map((values, index) => (
+              <li key={index}>{values}</li>
             ))
           }
         </ul>
         <hr />
-        <h3>Groups</h3>
+        <h3><Button variant="light">Groups</Button></h3>
         <ul>
           {
-            user.groups.length > 0 && user.groups.map(values => (
-              <li>{values}</li>
+            user.groups.length > 0 && user.groups.map((values, index) => (
+              <li key={index}>{values}</li>
             ))
           }
         </ul>

@@ -6,16 +6,17 @@ import "./Events.scss";
 
 const API_URL = "https://run.mocky.io/v3/4c755975-6142-459a-9bb8-2cc37efadb7e";
 
-const Events = () => {
+const Events = ({userEvents}) => {
   const [eventList, setEventList] = useState([]);
   const [show, setShow] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const checkJoinedGEvents = () => {
     const joinedEvents = eventList.filter( ({join}) => join === true);
-    const data =  JSON.parse(sessionStorage.getItem('user'));
-    data.events = joinedEvents;
-    sessionStorage.setItem('user', JSON.stringify(data));
+    // const data =  JSON.parse(sessionStorage.getItem('user'));
+    // data.events = joinedEvents;
+    userEvents(joinedEvents);
+    //sessionStorage.setItem('user', JSON.stringify(data));
   };
 
   const loadData = async () => {

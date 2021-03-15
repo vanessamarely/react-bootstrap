@@ -13,7 +13,7 @@ import "./Groups.scss";
 
 const API_URL = "https://run.mocky.io/v3/6a493a14-4155-463c-9f08-24be7e91cb6d";
 
-const Groups = () => {
+const Groups = ({userGroups}) => {
   const [initial, setInitialData] = useState([]);
   const [groups, setGroups] = useState([]);
   const [show, setShow] = useState(false);
@@ -21,9 +21,10 @@ const Groups = () => {
 
   const checkJoinedGroups = () => {
     const joinedGroups = groups.filter( ({join}) => join === true);
-    const data =  JSON.parse(sessionStorage.getItem('user'));
-    data.groups = joinedGroups;
-    sessionStorage.setItem('user', JSON.stringify(data));
+    // const data =  JSON.parse(sessionStorage.getItem('user'));
+    // data.groups = joinedGroups;
+    userGroups(joinedGroups);
+    //sessionStorage.setItem('user', JSON.stringify(data));
   };
 
   const loadData = async () => {
