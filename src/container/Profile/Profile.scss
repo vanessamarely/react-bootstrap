@@ -1,3 +1,8 @@
 .profile {
+  height: calc( 100vh - 70px);
   padding: 2em;
+  &__content {
+    margin: 2em;
+    width: 100%;
+  }
 }
