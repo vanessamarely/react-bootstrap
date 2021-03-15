@@ -1,9 +1,8 @@
 
-import { Button } from "react-bootstrap";
 import "./MyProfile.scss";
 
 const MyProfile = ({user}) => {
-  console.log(user)
+
   return (
     <section className="my-profile">
       <div className="my-profile__image">

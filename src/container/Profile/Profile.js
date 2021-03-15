@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Profile.scss";
 import { Nav, Row, Tab } from "react-bootstrap";
 import { Badge, Events, Groups, MyProfile } from "./components";
@@ -13,27 +13,45 @@ const InitialValue = {
 
 const Profile = () => {
   const [user, setUser] = useState(InitialValue);
+  const [badges, setBadges] = useState([]);
 
   const handleEvents = (data) => {
-    console.log("data ", data);
+    const countEvents = Object.keys(data).length;
+    let badgesEvents = [];
+    if (countEvents === 3) {
+      badgesEvents = badges.filter(({ name }) => name === "Networking");
+    }else{
+      badgesEvents = user.badges;
+    }
     setUser({
       name: "Username",
       biography: "This is my biography",
-      badges: user.badges,
+      badges: user.badges.concat(badgesEvents),
       groups: user.groups,
       events: data,
     });
   };
 
   const handleGroups = (data) => {
-    console.log("data ", data);
+    const countGroups = Object.keys(data).length;
+    let badgesbyGroups = [];
+    if (countGroups >= 1) {
+      badgesbyGroups = badges.filter(({ name }) => name === "Social");
+    } else{
+      badgesbyGroups = user.badges;
+    }
+    
     setUser({
       name: "Username",
       biography: "This is my biography",
-      badges: user.badges,
+      badges: badgesbyGroups,
       groups: data,
       events: user.events,
     });
+  };
+
+  const handleUserBadges = (data) => {
+    setBadges(data);
   };
 
   return (
@@ -61,7 +79,7 @@ const Profile = () => {
               <MyProfile user={user} />
             </Tab.Pane>
             <Tab.Pane eventKey="second">
-              <Badge />
+              <Badge allBadges={handleUserBadges} />
             </Tab.Pane>
             <Tab.Pane eventKey="third">
               <Groups userGroups={handleGroups} />

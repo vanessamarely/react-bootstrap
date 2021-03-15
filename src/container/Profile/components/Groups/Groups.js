@@ -17,6 +17,7 @@ const Groups = ({userGroups}) => {
   const [initial, setInitialData] = useState([]);
   const [groups, setGroups] = useState([]);
   const [show, setShow] = useState(false);
+  const [idToConfirm, setIdToConfirm] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const checkJoinedGroups = () => {
@@ -77,13 +78,14 @@ const Groups = ({userGroups}) => {
     setShow(true);
   };
 
-  const handleAbandon = (id) => {
+  const handleAbandon = () => {
     setShowConfirmation(false);
-    handleGroups(id, false);
+    handleGroups(idToConfirm, false);
   };
 
-  const handleModelConfirmation = () => {
+  const handleModelConfirmation = (id) => {
     setShowConfirmation(true);
+    setIdToConfirm(id);
   };
 
   return (
@@ -128,7 +130,7 @@ const Groups = ({userGroups}) => {
                   {join && (
                     <Button
                       variant="secondary"
-                      onClick={handleModelConfirmation}
+                      onClick={() => handleModelConfirmation(id)}
                     >
                       Abandon
                     </Button>
@@ -139,7 +141,7 @@ const Groups = ({userGroups}) => {
             <ConfirmationModal
               show={showConfirmation}
               onClose={() => setShowConfirmation(false)}
-              handleConfirmation={() => handleAbandon(id)}
+              handleConfirmation={handleAbandon}
             />
           </>
         ))}

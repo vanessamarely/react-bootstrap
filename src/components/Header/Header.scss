@@ -20,7 +20,7 @@
     &__menu {
       display: flex !important;
       flex-direction: column;
-      padding: .5em;
+      padding: .5em !important;
       .link {
         color: #807e7e;
       }

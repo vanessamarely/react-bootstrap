@@ -9,6 +9,7 @@ const API_URL = "https://run.mocky.io/v3/4c755975-6142-459a-9bb8-2cc37efadb7e";
 const Events = ({userEvents}) => {
   const [eventList, setEventList] = useState([]);
   const [show, setShow] = useState(false);
+  const [idToConfirm, setIdToConfirm] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const checkJoinedGEvents = () => {
@@ -47,13 +48,14 @@ const Events = ({userEvents}) => {
     setShow(true);
   };
 
-  const handleConfirmation = (id) => {
+  const handleConfirmation = () => {
     setShowConfirmation(false);
-    handleEvents(id, false);
+    handleEvents(idToConfirm, false);
   };
 
-  const handleModelConfirmation = () => {
+  const handleModelConfirmation = (id) => {
     setShowConfirmation(true);
+    setIdToConfirm(id);
   };
 
   return (
@@ -76,7 +78,7 @@ const Events = ({userEvents}) => {
                   {join && (
                     <Button
                       variant="secondary"
-                      onClick={handleModelConfirmation}
+                      onClick={() => handleModelConfirmation(id)}
                     >
                       Abandon
                     </Button>
@@ -87,7 +89,7 @@ const Events = ({userEvents}) => {
             <ConfirmationModal
               show={showConfirmation}
               onClose={() => setShowConfirmation(false)}
-              handleConfirmation={() => handleConfirmation(id)}
+              handleConfirmation={handleConfirmation}
             />
           </>
         ))}
