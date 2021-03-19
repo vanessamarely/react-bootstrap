@@ -1,0 +1,14 @@
+.my-profile {
+  height: 50vh;
+  overflow-y: auto;
+  &__image {
+    border-radius: 50%;
+    height: 100px;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 100px;
+  }
+  &__content {
+    padding: 1em;
+  }
+}
