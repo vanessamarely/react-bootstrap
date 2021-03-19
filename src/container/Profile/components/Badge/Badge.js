@@ -5,14 +5,14 @@ import { Card } from "react-bootstrap";
 
 const API_URL = "https://run.mocky.io/v3/9d5363d8-d5f6-43aa-b1b0-9c9d26d74526";
 
-const Badge = ({allBadges}) => {
+const Badge = () => {
   const [badges, setBadges] = useState([]);
 
   const loadData = async () => {
     const response = await fetch(API_URL);
     const data = await response.json();
     setBadges(data);
-    allBadges(data);
+    
   };
 
   useEffect(() => {

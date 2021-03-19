@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Profile.scss";
 import { Nav, Row, Tab } from "react-bootstrap";
 import { Badge, Events, Groups, MyProfile } from "./components";
@@ -11,9 +11,22 @@ const InitialValue = {
   events: [],
 };
 
+const API_URL = "https://run.mocky.io/v3/9d5363d8-d5f6-43aa-b1b0-9c9d26d74526";
+
 const Profile = () => {
   const [user, setUser] = useState(InitialValue);
   const [badges, setBadges] = useState([]);
+
+  const loadData = async () => {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    setBadges(data);
+  };
+
+  useEffect(() => {
+    loadData();
+    return () => {};
+  }, []);
 
   const handleEvents = (data) => {
     const countEvents = Object.keys(data).length;
@@ -51,7 +64,7 @@ const Profile = () => {
   };
 
   const handleUserBadges = (data) => {
-    setBadges(data);
+    // setBadges(data);
   };
 
   return (
@@ -79,7 +92,7 @@ const Profile = () => {
               <MyProfile user={user} />
             </Tab.Pane>
             <Tab.Pane eventKey="second">
-              <Badge allBadges={handleUserBadges} />
+              <Badge />
             </Tab.Pane>
             <Tab.Pane eventKey="third">
               <Groups userGroups={handleGroups} />
