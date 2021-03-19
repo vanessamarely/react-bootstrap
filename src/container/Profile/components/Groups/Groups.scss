@@ -1,0 +1,23 @@
+.groups {
+  height: 60vh;
+  overflow-y: auto;
+  width: 100%;
+  &__title {
+    text-align: center;
+  }
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &__filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2em;
+    &__search {
+      flex: 1;
+      margin-left: 2em;
+    }
+  }
+}
