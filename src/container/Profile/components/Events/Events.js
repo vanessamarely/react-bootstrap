@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Badge, Button, Card } from "react-bootstrap";
 import ConfirmationModal from "./../../../../components/Modal/ConfirmationModal";
 import ModalComponent from "./../../../../components/Modal/Modal";
@@ -12,25 +12,25 @@ const Events = ({userEvents}) => {
   const [idToConfirm, setIdToConfirm] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const checkJoinedGEvents = () => {
+  const checkJoinedGEvents = useCallback(() => {
     const joinedEvents = eventList.filter( ({join}) => join === true);
     // const data =  JSON.parse(sessionStorage.getItem('user'));
     // data.events = joinedEvents;
     userEvents(joinedEvents);
     //sessionStorage.setItem('user', JSON.stringify(data));
-  };
+  }, [eventList, userEvents]);
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     const response = await fetch(API_URL);
     const data = await response.json();
     setEventList(data);
     checkJoinedGEvents();
-  };
+  },[checkJoinedGEvents]);
 
   useEffect(() => {
     loadData();
     return () => {};
-  }, []);
+  }, [loadData]);
 
   const handleEvents = (value, state) => {
     const newArray = eventList.map((values) => {

@@ -63,10 +63,6 @@ const Profile = () => {
     });
   };
 
-  const handleUserBadges = (data) => {
-    // setBadges(data);
-  };
-
   return (
     <main className="profile">
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Badge,
   Button,
@@ -20,26 +20,26 @@ const Groups = ({userGroups}) => {
   const [idToConfirm, setIdToConfirm] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const checkJoinedGroups = () => {
+  const checkJoinedGroups = useCallback(() => {
     const joinedGroups = groups.filter( ({join}) => join === true);
     // const data =  JSON.parse(sessionStorage.getItem('user'));
     // data.groups = joinedGroups;
     userGroups(joinedGroups);
     //sessionStorage.setItem('user', JSON.stringify(data));
-  };
+  }, [userGroups, groups]);
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     const response = await fetch(API_URL);
     const data = await response.json();
     setGroups(data);
     setInitialData(data);
     checkJoinedGroups();
-  };
+  }, [checkJoinedGroups]);
 
   useEffect(() => {
     loadData();
     return () => {};
-  }, []);
+  }, [loadData]);
 
   const handleSelected = (option) => {
     setGroups(initial);
